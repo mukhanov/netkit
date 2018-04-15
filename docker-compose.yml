@@ -1,0 +1,24 @@
+version: '3'
+services:
+
+  socks5:
+    build: 
+      context: ./dante
+      args:
+        USER: hirkn
+        PASS: SlavaKpss
+    ports:
+      - "8811:1080/tcp"
+      - "8811:1080/udp"
+    restart: always
+
+  openvpn:
+    image: umputun/dockvpn
+    ports:
+      - "1194:1194/udp"
+      - "443:443/tcp"
+    restart: always    
+    privileged: true
+    volumes:
+      - '~/.openvpn:/etc/openvpn'
+
