@@ -2,6 +2,7 @@ version: '3'
 services:
 
   socks5:
+    container_name: "socks5-proxy"
     build: 
       context: ./dante
       args:
@@ -14,6 +15,7 @@ services:
 
   openvpn:
     image: umputun/dockvpn
+    container_name: "openvpn"
     ports:
       - "1194:1194/udp"
       - "443:443/tcp"
@@ -22,3 +24,15 @@ services:
     volumes:
       - '~/.openvpn:/etc/openvpn'
 
+  telegram-proxy:
+    image: telegrammessenger/proxy:latest
+    container_name: "telegram-proxy"
+    ports:
+      - "444:443"
+    environment:
+       - WORKERS=4
+    volumes:
+       - "~/data:/data"
+    restart: unless-stopped
+    env_file:
+       - ./config.env
