@@ -13,10 +13,9 @@ ufw default deny incoming
 ```
 
 ## 2) VPN
-Add following VPN settings to your device:
-|||
-|-|-|
-|Type| L2TP|
+Add following L2TP VPN settings to your device:
+|Name|Value|
+| --- | --- |
 |Shared key|your_ipsec_pre_shared_key|
 |Account| your_vpn_username|
 |Password| your_vpn_password|
