@@ -6,20 +6,20 @@ docker-compose -f docker-compose.yml up -d
 ufw allow 22 comment "SSH"
 ufw allow 8388/udp comment "Socks5"
 ufw allow 8811 comment "Socks5"
-ufw allow 8080 comment "OpenVPN"
-ufw allow 443 comment "OpenVPN"
-ufw allow 1194/udp comment "OpenVPN"
+ufw allow 500 comment "VPN"
+ufw allow 4500/udp comment "VPN"
 ufw allow 444 comment "MTProxy telegram"
+ufw default deny incoming
 ```
 
-## 2) OpenVPN
-```bash
-
-$ CID=`docker ps | grep dockvpn | awk '{print $1}'` && docker run -t -i -p 8080:8080 --volumes-from $CID umputun/dockvpn serveconfig
-
-https://195.234.32.123:8080/
-```
-and open OpenVPN configuration on your device by that URL from output
+## 2) VPN
+Add following VPN settings to your device:
+|||
+|-|-|
+|Type| L2TP|
+|Shared key|your_ipsec_pre_shared_key|
+|Account| your_vpn_username|
+|Password| your_vpn_password|
 
 ## 3) Telegram
 ```bash
